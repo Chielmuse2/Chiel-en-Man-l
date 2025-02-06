@@ -1,7 +1,7 @@
-# Vul hier de naam van je programma in:
+# Vul hier de naam van je programma in: MC pizzaria
 #
 #
-# Vul hier jullie namen in:
+# Vul hier jullie namen in: Chiel en Manèl
 #
 #
 #
