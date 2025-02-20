@@ -3,6 +3,8 @@
 #
 #
 # Vul hier jullie namen in:
+# BroSmarenDeDronestriker
+# tjiel
 #
 #
 #
@@ -18,17 +20,13 @@ import MCPizzeriaSQL
 
 ### --------- Hoofdprogramma  ---------------
 
+window = Tk()
+window.iconbitmap("MC_icon.ico") #Let op: Dit werkt niet op een MAC! Zet deze regel dan in commentaar
+window.wm_title("Gedverderriedezepizasmaaktnaardrerrie Pizzeria")
 venster = Tk()
-venster.iconbitmap("MC_icon.ico") #Let op: Dit werkt niet op een MAC! Zet deze regel dan in commentaar
-venster.wm_title("MC Pizzeria")
 
-
-
-
-
-
-
-
+closeWindow = Button(window, text="Close", width=50, height=2, command=venster.)
+closeWindow.grid(row=0,column=0)
 
 #reageert op gebruikersinvoer, deze regel als laatste laten staan
-venster.mainloop()
+window.mainloop()
