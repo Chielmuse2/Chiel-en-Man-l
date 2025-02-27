@@ -29,6 +29,28 @@ def zoekKlant():
     #toon klantAchternaam, de tweede kolom uit het resultaat in de invoerveld
     invoerveldKlantnaam.insert(END, rij[1]) 
 
+def zoekpizza():
+    gevonden_pizza = MCPizzeriaSQL.zoekPizzaInTabel(invoerveldpizzanaam.get())
+    print(gevonden_pizza) # om te testen
+    invoerveldpizzanaam.delete(0, END) #invoerveld voor naam leeg maken
+    for rij in gevonden_pizza: #voor elke rij dat de query oplevert
+        invoerveldpizzanaam.insert(END, rij[1]) 
+
+def toonMenuInListbox():
+ listboxMenu.delete(1, END) #maak de listbox leeg
+ pizza_tabel = MCPizzeriaSQL.vraagOpGegevensPizzaTabel()
+ for regel in pizza_tabel:
+  listboxMenu.insert(END, regel) #voeg elke regel uit resultaat in
+### functie voor het selecteren van een rij uit de listbox en deze in een andere veld te plaatsen
+def haalGeselecteerdeRijOp(event):
+ #bepaal op welke regel er geklikt is
+ geselecteerdeRegelInLijst = listboxMenu.curselection()[0] 
+ #haal tekst uit die regel
+ geselecteerdeTekst = listboxMenu.get(geselecteerdeRegelInLijst) 
+ #verwijder tekst uit veld waar je in wilt schrijven, voor het geval er al iets staat
+ invoerveldGeselecteerdePizza.delete(0, END) 
+ #zet tekst in veld
+ invoerveldGeselecteerdePizza.insert(0, geselecteerdeTekst)  
 ### --------- Hoofdprogramma  ---------------
 
 window = Tk()
@@ -46,7 +68,7 @@ ingevoerde_klantnaam = StringVar()
 invoerveldKlantnaam = Entry(window, textvariable=ingevoerde_klantnaam)
 invoerveldKlantnaam.grid(row=1, column=1, sticky="W")
 knopzoekopklantnaam = Button(window, text="Zoek klant", width=12, command=zoekKlant)
-knopzoekopklantnaam.grid(row=1, column=4)
+knopzoekopklantnaam.grid(row=1, column=6)
 
 labelIntro = Label(window, text="Klantnummer:")
 labelIntro.grid(row=2, column=0, sticky="W")
@@ -55,11 +77,31 @@ invoerveldKlantNr.grid(row=2, column=1, sticky="W")
 
 labelIntro = Label(window, text="pizzanaam:")
 labelIntro.grid(row=3, column=0, sticky="W")
-ingevoerde_pizzanaam = StringVar()
-invoerveldpizzanaam = Entry(window, textvariable=ingevoerde_pizzanaam)
+ingevoerde_pizza = StringVar()
+invoerveldpizzanaam = Entry(window, textvariable=ingevoerde_pizza)
 invoerveldpizzanaam.grid(row=3, column=1, sticky="W")
+knopzoekopklantnaam = Button(window, text="Zoek pizza", width=12, command=zoekpizza)
+knopzoekopklantnaam.grid(row=3, column=6)
 
 labelIntro = Label(window, text="Mogelijkheden:")
 labelIntro.grid(row=4, column=0, sticky="W")
+listboxMenu = Listbox(window, height=6, width=50)
+listboxMenu.grid(row=4, column=1, rowspan=6, columnspan=6, sticky="W")
+listboxMenu.insert(0, "ID Gerecht Prijs")
+listboxMenu.bind('<<ListboxSelect>>', haalGeselecteerdeRijOp)
+knopToonPizzas = Button(window, text="Toon alle pizzas", width=12, command=toonMenuInListbox)
+knopToonPizzas.grid(row=4, column=6)
+
+labelIntro = Label(window, text="Gekozen pizza:")
+labelIntro.grid(row=11, column=0, sticky="W")
+invoerveldGeselecteerdePizza = Entry(window)
+invoerveldGeselecteerdePizza.grid(row=11, column=1, sticky="W")
+
+Voegtoeknop = Button(window, text="Voeg toe", width=12)
+Voegtoeknop.grid(row=12, column=6)
+aantalGekozen = IntVar()
+aantalGekozen.set(1)
+
+
 #reageert op gebruikersinvoer, deze regel als laatste laten staan
 window.mainloop()

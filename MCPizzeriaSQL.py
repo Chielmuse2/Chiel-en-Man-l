@@ -79,6 +79,18 @@ def zoekKlantInTabel(ingevoerde_klantnaam):
     cursor.execute("SELECT * FROM tbl_klanten WHERE klantAchternaam = ?",(ingevoerde_klantnaam,))
     zoek_resultaat = cursor.fetchall()
  return zoek_resultaat
+
+def zoekPizzaInTabel(ingevoerde_pizza):
+ cursor.execute("SELECT * FROM tbl_pizzas WHERE gerechtNaam = ?", (ingevoerde_pizza,))
+ zoek_resultaat = cursor.fetchall()
+ return zoek_resultaat
+
+def vraagOpGegevensPizzaTabel():
+ cursor.execute("SELECT * FROM tbl_pizzas")
+ resultaat = cursor.fetchall()
+ print("Tabel tbl_pizzas:", resultaat)
+ return resultaat
+
 ### --------- Hoofdprogramma  ---------------
 
 
