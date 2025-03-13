@@ -11,10 +11,12 @@ def maakTabellenAan():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_klanten(
             gegrevensID INTEGER PRIMARY KEY AUTOINCREMENT,
-            consumentID INTEGER  NOT NULL,
+            consumentID INTEGER NOT NULL,
             programmaID INTEGER NOT NULL,
             campingplaats INTEGER,
-            pakeerplek INTEGER);""")
+            pakeerplek INTEGER,
+            FOREIGN KEY (consumentID) REFERENCES tbl_NAW(consumentID),
+            FOREIGN KEY (programmaID) REFERENCES tbl_programma(programmaID));""")
     
     print("Tabel 'tbl_klanten' aangemaakt.")
 
@@ -25,17 +27,18 @@ def maaknieuwetabbellenaan():
  voornaam TEXT NOT NULL,
  tussenvoegsel TEXT,
  achternaam TEXT NOT NULL,
- );""")
+ postcode TEXT NOT NULL,
+ adres TEXT NOT NULL,
+ email TEXT NOT NULL,
+ telefoonnummer TEXT);""")
  print("Tabel 'tbl_klanten' aangemaakt.") 
  cursor.execute("""
- DESTROY TABLE IF EXIST tbl_winkelWagen
- CREATE TABLE IF NOT EXISTS tbl_winkelWagen(
- bestelRegel INTEGER PRIMARY KEY AUTOINCREMENT,
- klantNr INTEGER,
- gerechtID INTEGER,
- aantal INTEGER NOT NULL,
- FOREIGN KEY (klantNr) REFERENCES tbl_klanten(klantNr)
- FOREIGN KEY (gerechtID) REFERENCES tbl_pizzas(gerechtID));""")
-print("Tabel 'tbl_winkelWagen' aangemaakt.")
+ CREATE TABLE IF NOT EXISTS tbl_programma(
+ programmaID INTERGER PRIMARY KEY NOT NULL,
+ dag TEXT NOT NULL,
+ hoofdartiest TEXT NOY NULL,
+ begintijd TIME NOT NULL);""")
+ print("Tabel 'tbl_winkelWagen' aangemaakt.")
+
 ################## Hoofdprogramma ##################
-maakTabellenAan()
+
