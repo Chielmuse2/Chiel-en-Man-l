@@ -11,7 +11,7 @@ hoverTextColor = "white"
 
 ################## def's ##################
 def on_enter(e): #e betekend in deze context any
-    e.widget.config(bg=hoverColor, fg=hoverTextColor) #kleur veranderen
+    e.widget.config(bg=hoverColor, fg=hoverTextColor) #kleur veranderen wanneer je boven de knop hangt
 
 def on_leave(e):
     e.widget.config(bg=fillColor, fg=textColor) #kleur terugveranderen
@@ -35,7 +35,7 @@ titel.place(x=156, y=0) #Ik gebruik hier place in plaats van grid omdat ik dit e
 borderVert = Label(window, width=0, height=30, bg="black")
 borderVert.place(x=206-50, y=205) #bij veel x waardes staat -50 omdat ik alles 50 naar links moest verplaatsen
 
-borderHor = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
+borderHor = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50)) #alle borders zijn puur omda ze er leuk uit zien
 borderHor.place(x=236-50, y=250)
 
 borderVert1 = Label(window, width=0, height=30, bg="black")
@@ -130,7 +130,7 @@ saturday.place(x=1189-50, y=846)
 sunday = Button(window, text="Sunday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width=7, height= 5)
 sunday.place(x=1346-50, y=846)
 
-image1_path = r"images/Felix.png"
+image1_path = r"images/Felix.png" #dit was me toch een gedoe om uit te vogelen haha
 image1 = Image.open(image1_path)
 image1 = image1.resize((610,355))
 photo1 = ImageTk.PhotoImage(image1)
@@ -140,7 +140,7 @@ image = Image.open(image_path)
 image = image.resize((614, 300))  
 photo = ImageTk.PhotoImage(image)
 
-photoLabel = Label(window, image=photo, bd=6, relief="solid")
+photoLabel = Label(window, image=photo, bd=6, relief="solid") #plaatje staat in een label
 photoLabel.place(x=870-50, y=198)
 
 photoLabel1 = Label(window, image=photo1, bd=6, relief="solid")
