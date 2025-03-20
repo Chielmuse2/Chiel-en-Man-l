@@ -16,6 +16,25 @@ def on_enter(e): #e betekend in deze context any
 def on_leave(e):
     e.widget.config(bg=fillColor, fg=textColor) #kleur terugveranderen
 
+def NAW_tabel():
+ ingevoerde_voornaam = invoerveldVoornaam.get()
+ print("ingevulde naam:", invoerveldVoornaam.get() )
+
+ ingevoerd_tussenvoegsel = invoerveldTussenvoegsel.get()
+ ingevoerde_achternaam = invoerveldAchternaam.get()
+ ingevoerde_postcode = invoerveldPostcode.get()
+ ingevoerd_adres = invoerveldAdres.get()
+ ingevoerde_email = invoerveldemail.get()
+ ingevoerde_telefoon = invoerveldtelefoon.get()
+ FestivalSQL.voegNAWToe(ingevoerde_voornaam,ingevoerd_tussenvoegsel,ingevoerde_achternaam,ingevoerde_postcode,ingevoerd_adres,ingevoerde_email,ingevoerde_telefoon)
+ print("mr/miss",ingevoerde_achternaam, "toegevoegd aan tabelNAW")
+
+def listboxdoen():
+ listboxSelected.delete(1, END) #maak de listbox leeg
+ tbl_klanten = FestivalSQL.tabel_klanten()
+ for regel in tbl_klanten:
+  listboxSelected.insert(END, regel) #voeg elke regel uit resultaat in
+### functie voor het selecteren van een rij uit de listbox en deze in een andere veld te plaatsen
 ################## Hoofdprogramma ##################
 window = Tk()
 kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
@@ -62,8 +81,8 @@ borderHor6.place(x=1515-50, y=1000)
 email = Label(window, text="Email:",bg=backgroundColor, font=kopjesFont)
 email.place(x=236-50, y=200)
 ingevoerde_email = StringVar()
-invoerveldKlantnaam = Entry(window, textvariable=ingevoerde_email, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldKlantnaam.place(x=486-50, y=200)
+invoerveldemail = Entry(window, textvariable=ingevoerde_email, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
+invoerveldemail.place(x=486-50, y=200)
 
 phone = Label(window, text="Phone Number:",bg=backgroundColor, font=kopjesFont)
 phone.place(x=236-50, y=250)
@@ -106,7 +125,7 @@ selected.place(x=1510-50, y=474)
 listboxSelected = Listbox(window, height=10, width= 156, bd= 6, relief="solid", bg=fillColor)
 listboxSelected.place(x=871-50, y=538)
 
-confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6)
+confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6, command=NAW_tabel)
 confirm.place(x=1516-50, y=726)
 
 campingSpot = Button(window, text="Camping Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)

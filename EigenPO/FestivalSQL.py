@@ -7,7 +7,7 @@ with sqlite3.connect("Festival.db") as db:
 ################## def's ##################
 
 def maakTabellenAan():
-     # Maak een nieuwe tabel met 3 kolommen: id, naam, prijs
+     # Maak een nieuwe tabel met 5 kolommen
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS tbl_klanten(
             gegrevensID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -31,7 +31,7 @@ def maaknieuwetabbellenaan():
  adres TEXT NOT NULL,
  email TEXT NOT NULL,
  telefoonnummer TEXT);""")
- print("Tabel 'tbl_klanten' aangemaakt.") 
+ print("Tabel 'tbl_NAW' aangemaakt.") 
  cursor.execute("""
  CREATE TABLE IF NOT EXISTS tbl_programma(
  programmaID INTERGER PRIMARY KEY NOT NULL,
@@ -40,5 +40,21 @@ def maaknieuwetabbellenaan():
  begintijd TIME NOT NULL);""")
  print("Tabel 'tbl_winkelWagen' aangemaakt.")
 
+def printTabel(tabel_naam):
+    cursor.execute("SELECT * FROM " + tabel_naam) #SQL om ALLE gegevens te halen
+    opgehaalde_gegevens = cursor.fetchall() #sla gegevens op in een variabele
+    print("Tabel " + tabel_naam + ":", opgehaalde_gegevens) #druk gegevens a
+
+def voegNAWToe(ingevoerd_voornaam, ingevoerd_tussenvoegsel, ingevoerd_achternaam, ingevoerd_postcode,ingevoerd_adres, ingevoerd_email, ingevoerd_telefoon ):
+    cursor.execute("INSERT INTO tbl_NAW VALUES(null, ?, ?, ?, ?, ?, ?, ?)", (ingevoerd_voornaam, ingevoerd_tussenvoegsel, ingevoerd_achternaam,ingevoerd_postcode,ingevoerd_adres, ingevoerd_email,ingevoerd_telefoon ))
+    db.commit()
+    print("Klant toegevoegd:")
+    printTabel("tbl_NAW")
+    
+def tabel_klanten():
+ cursor.execute("SELECT * FROM tbl_klanten")
+ resultaat = cursor.fetchall()
+ print("Tabel tbl_klanten:", resultaat)
+ return resultaat
 ################## Hoofdprogramma ##################
 
