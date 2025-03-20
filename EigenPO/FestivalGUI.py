@@ -3,9 +3,10 @@ from tkinter import font
 from PIL import Image, ImageTk
 import FestivalSQL
 
-backgroundColor = "#A3A9AA"
-fillColor = "#8D8E8E"
-hoverColor = "#475B5A"
+backgroundColor = "#BCEBCB"
+titleBackgroundColor = "#93B48B"
+fillColor = "#87D68D"
+hoverColor = "#93B48B"
 textColor = "black"
 hoverTextColor = "white"
 
@@ -16,119 +17,136 @@ def on_enter(e): #e betekend in deze context any
 def on_leave(e):
     e.widget.config(bg=fillColor, fg=textColor) #kleur terugveranderen
 
+#def open_main_window():
+#    welcome_window.withdraw()  #verstopt het welkomscherm
+#    window.deiconify()  #toont het hoofd scherm
+
+#def go_back_to_welcome():
+#    """ Closes the Main Window and reopens the Welcome Window """
+#    window.withdraw()  # Hide the Main Window
+#    welcome_window.deiconify()  # Show the Welcome Window
 ################## Hoofdprogramma ##################
+
+##### Welcome Window #####
+#welcome_window = Tk()
+#welcome_window.attributes("-fullscreen", True)
+# welcome_window.configure(bg=backgroundColor)
+# welcome_window.wm_title("Welcome to PoePaaPop!")
+
+#Button(welcome_window, text="Continue", command=open_main_window).pack(pady=10)
+
+##### Main Window #####
 window = Tk()
 kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
 titelFont = font.Font(family="Times New Roman", size= 100, weight="bold")
-window.overrideredirect(True)
-window.geometry("{0}x{1}+0+0".format(window.winfo_screenwidth(), window.winfo_screenheight()))
+window.attributes("-fullscreen", True)
 window.configure(bg=backgroundColor)
 window.wm_title("PoePaaPop")
 
-naastTitel = Label(window, bg=fillColor, bd=6, relief="solid", font=titelFont)
+naastTitel = Label(window, bg=titleBackgroundColor, bd=6, relief="solid", font=titelFont)
 naastTitel.place(relwidth=1)
-titel = Label(window, width= 20, bg=fillColor, text="P O E P A A P O P", bd=6, relief="solid", font=titelFont)
+titel = Label(window, width= 20, bg=titleBackgroundColor, text="P O E P A A P O P", bd=6, relief="solid", font=titelFont)
 titel.place(x=156, y=0) #Ik gebruik hier place in plaats van grid omdat ik dit een logischere manier vind, en zo geen spacers hoef te gebruiken.
 
 
 
 borderVert = Label(window, width=0, height=30, bg="black")
-borderVert.place(x=206-50, y=205) #bij veel x waardes staat -50 omdat ik alles 50 naar links moest verplaatsen
+borderVert.place(x=158, y=205)
 
 borderHor = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50)) #alle borders zijn puur omda ze er leuk uit zien
-borderHor.place(x=236-50, y=250)
+borderHor.place(x=186, y=250)
 
 borderVert1 = Label(window, width=0, height=30, bg="black")
-borderVert1.place(x=822-50, y=205)
+borderVert1.place(x=772, y=205)
 
 borderHor1 = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
-borderHor1.place(x=236-50, y=450)
+borderHor1.place(x=176, y=450)
 
 borderHor2 = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
-borderHor2.place(x=236-50, y=600)
+borderHor2.place(x=176, y=600)
 
 borderHor3 = Label(window, height= 0, bg=backgroundColor, text= "_______________________", font=("Arial", 50))
-borderHor3.place(x=925-50, y=450)
+borderHor3.place(x=875, y=450)
 
 borderHor4 = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
-borderHor4.place(x=928-50, y=750)
+borderHor4.place(x=875, y=750)
 
 borderHor5 = Label(window, height= 0, bg=backgroundColor, text= "-------------", font=("Arial", 50))
-borderHor5.place(x=1515-50, y=400)
+borderHor5.place(x=1473, y=400)
 
 borderHor6 = Label(window, height= 0, bg=backgroundColor, text= "-------------", font=("Arial", 50))
-borderHor6.place(x=1515-50, y=1000)
+borderHor6.place(x=1473, y=1000)
 
 email = Label(window, text="Email:",bg=backgroundColor, font=kopjesFont)
-email.place(x=236-50, y=200)
+email.place(x=186, y=200)
 ingevoerde_email = StringVar()
 invoerveldKlantnaam = Entry(window, textvariable=ingevoerde_email, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldKlantnaam.place(x=486-50, y=200)
+invoerveldKlantnaam.place(x=436, y=200)
 
 phone = Label(window, text="Phone Number:",bg=backgroundColor, font=kopjesFont)
-phone.place(x=236-50, y=250)
+phone.place(x=186, y=250)
 ingevoerde_telefoon = StringVar()
 invoerveldtelefoon = Entry(window, textvariable=ingevoerde_telefoon, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldtelefoon.place(x=486-50, y=250)
+invoerveldtelefoon.place(x=436, y=250)
 
 name = Label(window, text="First Name:",bg=backgroundColor, font=kopjesFont)
-name.place(x=236-50, y=350)
+name.place(x=186, y=350)
 ingevoerde_voornaam = StringVar()
 invoerveldVoornaam = Entry(window, textvariable=ingevoerde_voornaam, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldVoornaam.place(x=486-50, y=350)
+invoerveldVoornaam.place(x=436, y=350)
 
 prefix = Label(window, text="Prefix:",bg=backgroundColor, font=kopjesFont)
-prefix.place(x=236-50, y=400)
+prefix.place(x=186, y=400)
 ingevoerd_tussenvoegsel = StringVar()
 invoerveldTussenvoegsel = Entry(window, textvariable=ingevoerd_tussenvoegsel, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldTussenvoegsel.place(x=486-50, y=400)
+invoerveldTussenvoegsel.place(x=436, y=400)
 
 surname = Label(window, text="Surname:",bg=backgroundColor, font=kopjesFont)
-surname.place(x=236-50, y=450)
+surname.place(x=186, y=450)
 ingevoerde_achternaam = StringVar()
 invoerveldAchternaam = Entry(window, textvariable=ingevoerde_achternaam, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldAchternaam.place(x=486-50, y=450)
+invoerveldAchternaam.place(x=436, y=450)
 
 ZIPcode = Label(window, text="ZIP code:",bg=backgroundColor, font=kopjesFont)
-ZIPcode.place(x=236-50, y=550)
+ZIPcode.place(x=186, y=550)
 ingevoerde_postcode = StringVar()
 invoerveldPostcode = Entry(window, textvariable=ingevoerde_postcode, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldPostcode.place(x=486-50, y=550)
+invoerveldPostcode.place(x=436, y=550)
 
 address = Label(window, text="Address:",bg=backgroundColor, font=kopjesFont)
-address.place(x=236-50, y=600)
+address.place(x=186, y=600)
 ingevoerd_adres = StringVar()
 invoerveldAdres = Entry(window, textvariable=ingevoerd_adres, bd=6, relief="solid", font=("Verdana", 18), bg=fillColor)
-invoerveldAdres.place(x=486-50, y=600)
+invoerveldAdres.place(x=436, y=600)
 
 selected = Label(window, text="Selected:",bg=backgroundColor, font=kopjesFont)
-selected.place(x=1510-50, y=474)
+selected.place(x=1464, y=474)
 listboxSelected = Listbox(window, height=10, width= 156, bd= 6, relief="solid", bg=fillColor)
-listboxSelected.place(x=871-50, y=538)
+listboxSelected.place(x=821, y=538)
 
 confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6)
-confirm.place(x=1516-50, y=726)
+confirm.place(x=1467, y=726)
 
 campingSpot = Button(window, text="Camping Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)
-campingSpot.place(x=1194-50, y=726)
+campingSpot.place(x=1144, y=726)
 
 parkingSpot = Button(window, text="Parking Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)
-parkingSpot.place(x=871-50, y=726)
+parkingSpot.place(x=821, y=726)
 
 closeWindow = Button(window, text="Close", font=kopjesFont, bd=6, relief="solid", bg=fillColor, command=window.destroy, width= 15, height= 5)
-closeWindow.place(x=1515-50, y=198)
+closeWindow.place(x=1467, y=198)
 
 weekend = Button(window, text="Weekend", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
-weekend.place(x=871-50, y=846)
+weekend.place(x=821, y=846)
 
 friday = Button(window, text="Friday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
-friday.place(x=1030-50, y=846)
+friday.place(x=980, y=846)
 
 saturday = Button(window, text="Saturday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
-saturday.place(x=1189-50, y=846)
+saturday.place(x=1139, y=846)
 
 sunday = Button(window, text="Sunday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width=7, height= 5)
-sunday.place(x=1346-50, y=846)
+sunday.place(x=1294, y=846)
 
 image1_path = r"images/Felix.png" #dit was me toch een gedoe om uit te vogelen haha
 image1 = Image.open(image1_path)

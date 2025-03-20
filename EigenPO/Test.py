@@ -1,33 +1,31 @@
 import tkinter as tk
-from PIL import Image, ImageTk
 
-root = tk.Tk()
+def open_main_window():
+    """ Closes the Welcome Window and opens the Main Application Window """
+    welcome_window.withdraw()  # Hide the Welcome Window
+    main_window.deiconify()  # Show the Main Application Window
 
-# Set the window size (optional)
-root.geometry("800x600")  # Set the window size to 800x600 pixels
+def go_back_to_welcome():
+    """ Closes the Main Window and reopens the Welcome Window """
+    main_window.withdraw()  # Hide the Main Window
+    welcome_window.deiconify()  # Show the Welcome Window
 
-# Path to your background image
-image_path = r"images/crowd.png"  # Replace with the actual path to your image
+# Step 1: Create the Welcome Window
+welcome_window = tk.Tk()
+welcome_window.title("Welcome Window")
+welcome_window.geometry("500x300")
 
-# Open the image using Pillow
-bg_image = Image.open(image_path)
+tk.Label(welcome_window, text="Welcome to My Program!", font=("Arial", 16)).pack(pady=20)
+tk.Button(welcome_window, text="Continue", command=open_main_window).pack(pady=10)
 
-# Resize the image to fit the window size (optional)
-bg_image = bg_image.resize((800, 600))  # Resize to fit the window size
+# Step 2: Create the Main Application Window (Initially Hidden)
+main_window = tk.Toplevel()
+main_window.withdraw()  # Keep it hidden initially
+main_window.title("Main Application")
+main_window.geometry("600x400")
 
-# Convert the image to a format that Tkinter can use
-bg_photo = ImageTk.PhotoImage(bg_image)
-
-# Create a Label widget to act as the background
-background_label = tk.Label(root, image=bg_photo)
-background_label.place(relwidth=1, relheight=1)  # Make the label fill the entire window
-
-# Now you can add other widgets on top of the background
-label = tk.Label(root, text="This is a label over the background", fg="white", font=("Arial", 20))
-label.pack(pady=20)
-
-button = tk.Button(root, text="Click Me", font=("Arial", 14))
-button.pack(pady=10)
+tk.Label(main_window, text="This is the Main Window", font=("Arial", 16)).pack(pady=20)
+tk.Button(main_window, text="Go Back to Welcome", command=go_back_to_welcome).pack(pady=10)
 
 # Start the Tkinter event loop
-root.mainloop()
+welcome_window.mainloop()
