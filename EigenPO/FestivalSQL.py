@@ -40,6 +40,12 @@ def maaknieuwetabbellenaan():
  begintijd TIME NOT NULL);""")
  print("Tabel 'tbl_winkelWagen' aangemaakt.")
 
+def verwijderNAW(NUMMER):
+    cursor.execute("DELETE FROM tbl_NAW WHERE consumentID = ?", (NUMMER,))
+    print("Gerecht verwijderd uit 'tbl_NAW':", NUMMER )
+    db.commit() #gegevens naar de database wegschrijven
+    printTabel("tbl_NAW")
+
 def printTabel(tabel_naam):
     cursor.execute("SELECT * FROM " + tabel_naam) #SQL om ALLE gegevens te halen
     opgehaalde_gegevens = cursor.fetchall() #sla gegevens op in een variabele
@@ -48,9 +54,6 @@ def printTabel(tabel_naam):
 def voegNAWToe(ingevoerd_voornaam, ingevoerd_tussenvoegsel, ingevoerd_achternaam, ingevoerd_postcode,ingevoerd_adres, ingevoerd_email, ingevoerd_telefoon ):
     cursor.execute("INSERT INTO tbl_NAW VALUES(null, ?, ?, ?, ?, ?, ?, ?)", (ingevoerd_voornaam, ingevoerd_tussenvoegsel, ingevoerd_achternaam,ingevoerd_postcode,ingevoerd_adres, ingevoerd_email,ingevoerd_telefoon ))
     db.commit()
-    cursor.execute("SELECT consumentID FROM tbl_NAW WHERE voornaam = ?", (ingevoerd_voornaam,))
-    klant = cursor.fetchall()
-    cursor.execute("INSERT INTO tbl_klanten VALUES(null, ?,?,?,?)", (klant,"","",""))
     print("Klant toegevoegd:")
     printTabel("tbl_NAW")
     
@@ -62,11 +65,20 @@ def tabel_klanten():
 
 def knopvrijdag(ingevoerde_voornaam):
  dag = 1
- cursor.execute("SELECT tbl_klanten.gegrevensID FROM tbl_klanten LEFT JOIN tbl_NAW ON tbl_klanten.consumentID = tbl_NAW.consumentID WHERE tbl_NAW.voornaam = ?", (ingevoerde_voornaam,))
- klant = cursor.fetchall()
- cursor.execute("UPDATE tbl_klanten SET programmaID = ? WHERE gegrevensID = ?", (dag, klant))
- db.commit() #gegevens naar de database wegschrijven
+ cursor.execute("SELECT consumentID FROM tbl_NAW WHERE voornaam = ?", (ingevoerde_voornaam,))
+ klant = cursor.fetchone()
+ print(klant)
+ cursor.execute("SELECT consumentID FROM tbl_klanten WHERE consumentID = ?",(klant[0],))
+ zoek = cursor.fetchone()
+ if zoek == []:
+    cursor.execute("INSERT INTO tbl_klanten VALUES(null, ?,?,?,?)", (klant,dag,))
+     #gegevens naar de database wegschrijven
+    print("made")
+ else:
+    cursor.execute("UPDATE tbl_klanten SET programmaID = ? WHERE consumentID = ?", (dag, klant[0]))
+    print("updated")
+ db.commit()
  print("programma aangepast")
  printTabel("tbl_klanten")
-################## Hoofdprogramma ##################
 
+################## Hoofdprogramma ##################
