@@ -15,16 +15,14 @@ def on_enter(e): #e betekend in deze context any
     e.widget.config(bg=hoverColor, fg=hoverTextColor) #kleur veranderen wanneer je boven de knop hangt
 
 def on_leave(e):
-    e.widget.config(bg=fillColor, fg=textColor) #kleur terugveranderen
+    e.widget.config(bg=fillColor, fg=textColor) #kleur terugveranderen als je weer van de knop af gaat
 
-#def open_main_window():
-#    welcome_window.withdraw()  #verstopt het welkomscherm
-#    window.deiconify()  #toont het hoofd scherm
+def open_main_window():
+    window.deiconify()  #toont het hoofdscherm
 
-#def go_back_to_welcome():
-#    """ Closes the Main Window and reopens the Welcome Window """
-#    window.withdraw()  # Hide the Main Window
-#    welcome_window.deiconify()  # Show the Welcome Window
+def close_all():
+   welcome_window.destroy()
+
 def NAW_tabel():
  ingevoerde_voornaam = invoerveldVoornaam.get()
  print("ingevulde naam:", invoerveldVoornaam.get() )
@@ -47,17 +45,59 @@ def listboxdoen():
 ################## Hoofdprogramma ##################
 
 ##### Welcome Window #####
-#welcome_window = Tk()
-#welcome_window.attributes("-fullscreen", True)
-# welcome_window.configure(bg=backgroundColor)
-# welcome_window.wm_title("Welcome to PoePaaPop!")
+welcome_window = Tk()
+welcome_window.attributes("-fullscreen", True)
 
-#Button(welcome_window, text="Continue", command=open_main_window).pack(pady=10)
-
-##### Main Window #####
-window = Tk()
 kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
 titelFont = font.Font(family="Times New Roman", size= 100, weight="bold")
+normalFont = font.Font(family="Arial", size= 24)
+
+welcome_window.configure(bg=backgroundColor)
+welcome_window.wm_title("Welcome to PoePaaPop!")
+
+naastTitel = Label(welcome_window, bg=titleBackgroundColor, bd=6, relief="solid", font=titelFont)
+naastTitel.place(relwidth=1)
+titel = Label(welcome_window, width= 20, bg=titleBackgroundColor, text="P O E P A A P O P", bd=6, relief="solid", font=titelFont)
+titel.place(x=156, y=0)
+
+openMain = Button(welcome_window, text="Buy Tickets", font=kopjesFont, bd=6, relief="solid", bg=fillColor, command=open_main_window, width= 15, height= 5)
+openMain.place(x=1467, y=198)
+
+welcomeText = Label(welcome_window, font=kopjesFont, text="Welcome to poepaapop!", bg=backgroundColor)
+welcomeText.place(x=186,y=205)
+
+description = Label(welcome_window, font=normalFont, text="Welcome to poepaapop!", bg=backgroundColor)
+description.place(x=186,y=255)
+
+borderVert = Label(welcome_window, width=0, height=30, bg="black")
+borderVert.place(x=158, y=205)
+
+borderVert1 = Label(welcome_window, width=0, height=30, bg="black")
+borderVert1.place(x=772, y=205)
+
+# borderHor1 = Label(welcome_window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
+# borderHor1.place(x=176, y=450)
+
+# borderHor2 = Label(welcome_window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
+# borderHor2.place(x=176, y=600)
+
+# borderHor3 = Label(welcome_window, height= 0, bg=backgroundColor, text= "_______________________", font=("Arial", 50))
+# borderHor3.place(x=875, y=450)
+
+# borderHor4 = Label(welcome_window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50))
+# borderHor4.place(x=875, y=750)
+
+# borderHor5 = Label(welcome_window, height= 0, bg=backgroundColor, text= "-------------", font=("Arial", 50))
+# borderHor5.place(x=1473, y=400)
+
+# borderHor6 = Label(welcome_window, height= 0, bg=backgroundColor, text= "-------------", font=("Arial", 50))
+# borderHor6.place(x=1473, y=1000)
+
+##### Main Window #####
+window = Toplevel()
+window.withdraw()
+#kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
+#titelFont = font.Font(family="Times New Roman", size= 100, weight="bold")
 window.attributes("-fullscreen", True)
 window.configure(bg=backgroundColor)
 window.wm_title("PoePaaPop")
@@ -65,14 +105,14 @@ window.wm_title("PoePaaPop")
 naastTitel = Label(window, bg=titleBackgroundColor, bd=6, relief="solid", font=titelFont)
 naastTitel.place(relwidth=1)
 titel = Label(window, width= 20, bg=titleBackgroundColor, text="P O E P A A P O P", bd=6, relief="solid", font=titelFont)
-titel.place(x=156, y=0) #Ik gebruik hier place in plaats van grid omdat ik dit een logischere manier vind, en zo geen spacers hoef te gebruiken.
+titel.place(x=156, y=0) #Ik gebruik place in plaats van grid. Ik heb namelijk een specefiek design gemaakt die ik wilde volgen en dit ging erg moeilijk met grid. Place vind ik dus veel fijner om mee te werken.
 
 
 
 borderVert = Label(window, width=0, height=30, bg="black")
 borderVert.place(x=158, y=205)
 
-borderHor = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50)) #alle borders zijn puur omda ze er leuk uit zien
+borderHor = Label(window, height= 0, bg=backgroundColor, text= "______________", font=("Arial", 50)) #alle borders zijn puur omdat ze er leuk uit zien
 borderHor.place(x=186, y=250)
 
 borderVert1 = Label(window, width=0, height=30, bg="black")
@@ -152,7 +192,7 @@ campingSpot.place(x=1144, y=726)
 parkingSpot = Button(window, text="Parking Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)
 parkingSpot.place(x=821, y=726)
 
-closeWindow = Button(window, text="Close", font=kopjesFont, bd=6, relief="solid", bg=fillColor, command=window.destroy, width= 15, height= 5)
+closeWindow = Button(window, text="Close", font=kopjesFont, bd=6, relief="solid", bg=fillColor, command=close_all, width= 15, height= 5)
 closeWindow.place(x=1467, y=198)
 
 weekend = Button(window, text="Weekend", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
@@ -184,11 +224,11 @@ photoLabel1 = Label(window, image=photo1, bd=6, relief="solid")
 photoLabel1.place(x=206-50, y=700)
 
 buttons = [
-    confirm, closeWindow, weekend, friday, saturday, sunday, parkingSpot, campingSpot
+    confirm, closeWindow, weekend, friday, saturday, sunday, parkingSpot, campingSpot, openMain
 ]
 
 for Button in buttons: #dit zorgt ervoor dat voor elke knop in de lijst buttons[] de knop aan on_enter() en on_leave() wordt gekoppeld
     Button.bind("<Enter>", on_enter) #run on_enter() als je over de knop hovert
     Button.bind("<Leave>", on_leave) #run on_leave() als je weer van de knop af gaat
 
-window.mainloop()
+welcome_window.mainloop()
