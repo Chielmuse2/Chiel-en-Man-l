@@ -36,6 +36,11 @@ def NAW_tabel():
  FestivalSQL.voegNAWToe(ingevoerde_voornaam,ingevoerd_tussenvoegsel,ingevoerde_achternaam,ingevoerde_postcode,ingevoerd_adres,ingevoerde_email,ingevoerde_telefoon)
  print("mr/miss",ingevoerde_achternaam, "toegevoegd aan tabelNAW")
 
+def knopvrijdag():
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopvrijdag(ingevoerde_voornaam)
+
 def listboxdoen():
  listboxSelected.delete(1, END) #maak de listbox leeg
  tbl_klanten = FestivalSQL.tabel_klanten()
@@ -198,7 +203,7 @@ closeWindow.place(x=1467, y=198)
 weekend = Button(window, text="Weekend", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
 weekend.place(x=821, y=846)
 
-friday = Button(window, text="Friday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
+friday = Button(window, text="Friday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5, command=knopvrijdag)
 friday.place(x=980, y=846)
 
 saturday = Button(window, text="Saturday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
