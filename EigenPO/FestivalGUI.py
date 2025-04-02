@@ -37,13 +37,46 @@ def NAW_tabel():
  print("mr/miss",ingevoerde_achternaam, "toegevoegd aan tabelNAW")
 
 def knopvrijdag():
+   NAW_tabel()
    ingevoerde_voornaam = invoerveldVoornaam.get()
    print("ingevulde naam:", invoerveldVoornaam.get() )
    FestivalSQL.knopvrijdag(ingevoerde_voornaam)
 
+def knopzaterdag():
+   NAW_tabel()
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopzaterdag(ingevoerde_voornaam)
+
+def knopzondag():
+   NAW_tabel()
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopzondag(ingevoerde_voornaam)
+
+def knopweekend():
+   NAW_tabel()
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopweekend(ingevoerde_voornaam)
+
+def knopcampeerplek():
+   NAW_tabel()
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopcampingplek(ingevoerde_voornaam)
+
+def knopparkeerplek():
+   NAW_tabel()
+   ingevoerde_voornaam = invoerveldVoornaam.get()
+   print("ingevulde naam:", invoerveldVoornaam.get() )
+   FestivalSQL.knopparkeerplek(ingevoerde_voornaam)
+
 def listboxdoen():
+ ingevoerde_voornaam = invoerveldVoornaam.get()
+ NAW_tabel()
  listboxSelected.delete(1, END) #maak de listbox leeg
- tbl_klanten = FestivalSQL.tabel_klanten()
+ tbl_klanten = FestivalSQL.tabel_klanten(ingevoerde_voornaam)
  for regel in tbl_klanten:
   listboxSelected.insert(END, regel) #voeg elke regel uit resultaat in
 ### functie voor het selecteren van een rij uit de listbox en deze in een andere veld te plaatsen
@@ -56,6 +89,7 @@ welcome_window.attributes("-fullscreen", True)
 kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
 titelFont = font.Font(family="Times New Roman", size= 100, weight="bold")
 normalFont = font.Font(family="Arial", size= 24)
+listboxfont = font.Font(family="Helvetica", size= 100)
 
 welcome_window.configure(bg=backgroundColor)
 welcome_window.wm_title("Welcome to PoePaaPop!")
@@ -185,31 +219,31 @@ invoerveldAdres.place(x=436, y=600)
 
 selected = Label(window, text="Selected:",bg=backgroundColor, font=kopjesFont)
 selected.place(x=1464, y=474)
-listboxSelected = Listbox(window, height=10, width= 156, bd= 6, relief="solid", bg=fillColor)
+listboxSelected = Listbox(window, height=10, width= 156, bd= 6, relief="solid", bg=fillColor, font=listboxfont)
 listboxSelected.place(x=821, y=538)
 
-confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6, command=NAW_tabel)
+confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6, command=listboxdoen)
 confirm.place(x=1516-50, y=726)
 
-campingSpot = Button(window, text="Camping Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)
+campingSpot = Button(window, text="Camping Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, command=knopcampeerplek)
 campingSpot.place(x=1144, y=726)
 
-parkingSpot = Button(window, text="Parking Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15)
+parkingSpot = Button(window, text="Parking Spot", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, command=knopparkeerplek)
 parkingSpot.place(x=821, y=726)
 
 closeWindow = Button(window, text="Close", font=kopjesFont, bd=6, relief="solid", bg=fillColor, command=close_all, width= 15, height= 5)
 closeWindow.place(x=1467, y=198)
 
-weekend = Button(window, text="Weekend", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
+weekend = Button(window, text="Weekend", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5, command=knopweekend)
 weekend.place(x=821, y=846)
 
 friday = Button(window, text="Friday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5, command=knopvrijdag)
 friday.place(x=980, y=846)
 
-saturday = Button(window, text="Saturday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5)
+saturday = Button(window, text="Saturday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 7, height= 5, command=knopzaterdag)
 saturday.place(x=1139, y=846)
 
-sunday = Button(window, text="Sunday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width=7, height= 5)
+sunday = Button(window, text="Sunday", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width=7, height= 5, command=knopzondag)
 sunday.place(x=1294, y=846)
 
 image1_path = r"images/Felix.png" #dit was me toch een gedoe om uit te vogelen haha
