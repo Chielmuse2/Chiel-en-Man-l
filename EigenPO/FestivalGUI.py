@@ -89,7 +89,7 @@ welcome_window.attributes("-fullscreen", True)
 kopjesFont = font.Font(family="Arial", size= 24, weight="bold") #Best wel vet, ben erachter gekomen hoe ik text dik kan drukken.
 titelFont = font.Font(family="Times New Roman", size= 100, weight="bold")
 normalFont = font.Font(family="Arial", size= 24)
-listboxfont = font.Font(family="Helvetica", size= 100)
+listboxfont = font.Font(family="Helvetica", size= 20, weight="bold")
 
 welcome_window.configure(bg=backgroundColor)
 welcome_window.wm_title("Welcome to PoePaaPop!")
@@ -219,7 +219,8 @@ invoerveldAdres.place(x=436, y=600)
 
 selected = Label(window, text="Selected:",bg=backgroundColor, font=kopjesFont)
 selected.place(x=1464, y=474)
-listboxSelected = Listbox(window, height=10, width= 156, bd= 6, relief="solid", bg=fillColor, font=listboxfont)
+listboxSelected = Listbox(window, height=5, width= 65, bd= 6, relief="solid", bg=fillColor, font=listboxfont)
+listboxSelected.insert(0, "Naam     dag hoofdartiest begintijd campingplaats parkeerplek")
 listboxSelected.place(x=821, y=538)
 
 confirm = Button(window, text="Confirm Selection", font=kopjesFont, bd=6, relief="solid", bg=fillColor, width= 15, height= 6, command=listboxdoen)
